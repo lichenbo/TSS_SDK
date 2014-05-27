@@ -74,7 +74,7 @@ def getCourseAnnouncement(courseid):
 def getCourseAssignment(courseid):
     courseurl = 'http://218.94.159.102/tss/en/'+courseid+'/assignment/index.html'
     r = requests.get(courseurl, cookies=cookie, headers=headers)
-    regex = r'Assignment No:</td>\s+<td width="\d+%"> (?P<assignment_number>\d+)</td>\s+</tr>\s+<tr>\s+<td>Due date:</td>\s+<td>(?P<due_date>[\d\-: ]+)</td>\s+</tr>\s+<tr>\s+<td>Description file: </td>\s+<td>((.|\s)(?!</td>))+(.|\s)</td>\s+</tr>\s+<tr>\s+<td> Description:</td>\s+<td> (?P<description>((.|\s)(?!</td>))+(.|\s))</td>'
+    regex = r'Assignment No:</td>\s+<td width="\d+%"> (?P<assignment_number>\d+)</td>\s+</tr>\s+<tr>\s+<td>Due date:</td>\s+<td>(?P<due_date>[\d\-: ]+)</td>\s+</tr>\s+<tr>\s+<td>Description file: </td>\s+<td>((.|\s)(?!</td>))+(.|\s)</td>\s+</tr>\s+<tr>\s+<td> Description:</td>\s+<td> (?P<description>((.|\s)(?!</td>))*(.|\s))</td>'
     finditer = re.finditer(regex,r.text)
     assignmentlist = []
     for match in finditer:
@@ -83,4 +83,5 @@ def getCourseAssignment(courseid):
         assignment['due_date'] = match.group('due_date')
         assignment['description'] = match.group('description')
         assignmentlist.append(assignment)
+        print(assignment)
     return assignmentlist
