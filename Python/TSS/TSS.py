@@ -83,5 +83,4 @@ def getCourseAssignment(courseid):
         assignment['due_date'] = match.group('due_date')
         assignment['description'] = match.group('description')
         assignmentlist.append(assignment)
-        print(assignment)
     return assignmentlist
