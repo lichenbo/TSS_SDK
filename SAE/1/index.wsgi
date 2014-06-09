@@ -7,7 +7,7 @@ app.debug = True
 
 @app.route('/')
 def hello():
-	return render_template('new.html')
+	return render_template('readme.html')
 
 @app.route('/api/v1.0/course/<string:courseid>/announcement', methods=['GET'])
 def announcement(courseid):
